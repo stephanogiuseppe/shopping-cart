@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <Products>
       <li>
-        <img src="https://picsum.photos/200/300" alt="random image" />
+        <img src="https://picsum.photos/200/200" alt="random image" />
         <strong>Random image</strong>
         <span>R$ 219,00</span>
 
@@ -20,7 +20,7 @@ export default function Home() {
       </li>
 
       <li>
-        <img src="https://picsum.photos/200/300" alt="random image" />
+        <img src="https://picsum.photos/200/200" alt="random image" />
         <strong>Random image</strong>
         <span>R$ 219,00</span>
 
@@ -32,7 +32,7 @@ export default function Home() {
         </button>
       </li>
       <li>
-        <img src="https://picsum.photos/200/300" alt="random image" />
+        <img src="https://picsum.photos/200/200" alt="random image" />
         <strong>Random image</strong>
         <span>R$ 219,00</span>
 
@@ -44,7 +44,7 @@ export default function Home() {
         </button>
       </li>
       <li>
-        <img src="https://picsum.photos/200/300" alt="random image" />
+        <img src="https://picsum.photos/200/200" alt="random image" />
         <strong>Random image</strong>
         <span>R$ 219,00</span>
 
@@ -56,7 +56,7 @@ export default function Home() {
         </button>
       </li>
       <li>
-        <img src="https://picsum.photos/200/300" alt="random image" />
+        <img src="https://picsum.photos/200/200" alt="random image" />
         <strong>Random image</strong>
         <span>R$ 219,00</span>
 
@@ -68,7 +68,7 @@ export default function Home() {
         </button>
       </li>
       <li>
-        <img src="https://picsum.photos/200/300" alt="random image" />
+        <img src="https://picsum.photos/200/200" alt="random image" />
         <strong>Random image</strong>
         <span>R$ 219,00</span>
 
