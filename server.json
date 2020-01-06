@@ -30,37 +30,37 @@
       "id": 1,
       "title": "Product 1",
       "price": 179.9,
-      "image": "https://picsum.photos/200/200"
+      "image": "https://picsum.photos/id/111/200"
     },
     {
       "id": 2,
       "title": "Other product",
       "price": 139.9,
-      "image": "https://picsum.photos/200/200"
+      "image": "https://picsum.photos/id/119/200"
     },
     {
       "id": 3,
       "title": "One more product",
       "price": 219.9,
-      "image": "https://picsum.photos/200/200"
+      "image": "https://picsum.photos/id/146/200"
     },
     {
       "id": 5,
       "title": "Random product",
       "price": 32.5,
-      "image": "https://picsum.photos/200/200"
+      "image": "https://picsum.photos/id/1080/200"
     },
     {
       "id": 6,
       "title": "The best product",
       "price": 330.0,
-      "image": "https://picsum.photos/200/200"
+      "image": "https://picsum.photos/id/157/200"
     },
     {
       "id": 4,
       "title": "The worst product",
       "price": 18.25,
-      "image": "https://picsum.photos/200/200"
+      "image": "https://picsum.photos/id/1082/200"
     }
   ]
 }
