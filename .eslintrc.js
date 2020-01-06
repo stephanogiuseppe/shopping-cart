@@ -39,6 +39,7 @@ module.exports = {
       "anonymous": "never",
       "named": "never",
       "asyncArrow": "always"
-    }]
+    }],
+    'no-console': ["error", { allow: ["tron"]}]
   }
 }
