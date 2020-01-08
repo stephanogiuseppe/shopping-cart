@@ -5,11 +5,13 @@ import {
   MdDelete
 } from 'react-icons/md'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
 
 import { connect } from 'react-redux'
 import { Container, Products, Total } from './styles'
+import * as CartActions from './../../store/modules/cart/actions'
 
-function Cart({ cart, dispatch }) {
+function Cart({ cart, removeProductFromCart }) {
   return (
     <Container>
       <Products>
@@ -49,9 +51,7 @@ function Cart({ cart, dispatch }) {
               <td>
                 <button
                   type="button"
-                  onClick={() =>
-                    dispatch({ type: 'REMOVE_FROM_CART', id: product.id })
-                  }
+                  onClick={() => removeProductFromCart(product.id)}
                 >
                   <MdDelete size={20} />
                 </button>
@@ -77,7 +77,9 @@ const mapStateToProps = state => ({
 
 Cart.propTypes = {
   cart: PropTypes.func,
-  dispatch: PropTypes.func
+  removeProductFromCart: PropTypes.func
 }
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

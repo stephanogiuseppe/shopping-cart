@@ -18,7 +18,7 @@ export default function cart(olderProducts = [], action) {
         }
       ]
     }
-    case 'REMOVE_FROM_CART': {
+    case 'REMOVE_PRODUCT_FROM_CART': {
       const productIndex = olderProducts.findIndex(
         item => item.id === action.id
       )

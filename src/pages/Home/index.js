@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { MdAddShoppingCart } from 'react-icons/md'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
 
 import api from './../../services/api'
 import { formatPriceToBRMask } from './../../util/format'
 import { Products } from './styles'
+import * as CartActions from './../../store/modules/cart/actions'
 
 class Home extends Component {
   state = {
@@ -22,12 +24,8 @@ class Home extends Component {
   }
 
   handleAddProduct(product) {
-    const { dispatch } = this.props
-
-    dispatch({
-      type: 'ADD_PRODUCT_TO_CART',
-      product
-    })
+    const { addProductToCart } = this.props
+    addProductToCart(product)
   }
 
   render() {
@@ -58,7 +56,9 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  dispatch: PropTypes.func
+  addProductToCart: PropTypes.func
 }
 
-export default connect()(Home)
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
+
+export default connect(null, mapDispatchToProps)(Home)
