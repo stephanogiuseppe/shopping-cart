@@ -4,10 +4,12 @@ import {
   MdAddCircleOutline,
   MdDelete
 } from 'react-icons/md'
+import PropTypes from 'prop-types'
 
+import { connect } from 'react-redux'
 import { Container, Products, Total } from './styles'
 
-export default function Cart() {
+function Cart({ cart }) {
   return (
     <Container>
       <Products>
@@ -21,34 +23,36 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img src="https://picsum.photos/200/200" alt="random image" />
-            </td>
-            <td>
-              <strong>Random image</strong>
-              <span>R$ 219,00</span>
-            </td>
-            <td>
-              <div>
+          {cart.map(product => (
+            <tr key={product.id}>
+              <td>
+                <img src={product.image} alt={product.title} />
+              </td>
+              <td>
+                <strong>{product.title}</strong>
+                <span>{product.priceFormatted}</span>
+              </td>
+              <td>
+                <div>
+                  <button type="button">
+                    <MdRemoveCircleOutline size={20} />
+                  </button>
+                  <input type="number" readOnly value={product.amount} />
+                  <button type="button">
+                    <MdAddCircleOutline size={20} />
+                  </button>
+                </div>
+              </td>
+              <td>
+                <strong>R$ 428,00</strong>
+              </td>
+              <td>
                 <button type="button">
-                  <MdRemoveCircleOutline size={20} />
+                  <MdDelete size={20} />
                 </button>
-                <input type="number" readOnly value={2} />
-                <button type="button">
-                  <MdAddCircleOutline size={20} />
-                </button>
-              </div>
-            </td>
-            <td>
-              <strong>R$ 428,00</strong>
-            </td>
-            <td>
-              <button type="button">
-                <MdDelete size={20} />
-              </button>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Products>
       <footer>
@@ -61,3 +65,13 @@ export default function Cart() {
     </Container>
   )
 }
+
+const mapStateToProps = state => ({
+  cart: state.cart
+})
+
+Cart.propTypes = {
+  cart: PropTypes.func
+}
+
+export default connect(mapStateToProps)(Cart)
