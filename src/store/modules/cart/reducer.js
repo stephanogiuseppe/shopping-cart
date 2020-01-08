@@ -27,6 +27,21 @@ export default function cart(olderProducts = [], action) {
 
       return [...olderProducts]
     }
+    case 'UPDATE_AMOUNT_PRODUCT_FROM_CART': {
+      if (action.amount <= 0) {
+        return olderProducts
+      }
+
+      const productIndex = olderProducts.findIndex(
+        item => item.id === action.id
+      )
+
+      if (productIndex >= 0) {
+        olderProducts[productIndex].amount = Number(action.amount)
+      }
+
+      return [...olderProducts]
+    }
     default:
       return olderProducts
   }

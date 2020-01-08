@@ -11,7 +11,15 @@ import { connect } from 'react-redux'
 import { Container, Products, Total } from './styles'
 import * as CartActions from './../../store/modules/cart/actions'
 
-function Cart({ cart, removeProductFromCart }) {
+function Cart({ cart, removeProductFromCart, updateAmountProductFromCart }) {
+  function increment(product) {
+    updateAmountProductFromCart(product.id, product.amount + 1)
+  }
+
+  function decrement(product) {
+    updateAmountProductFromCart(product.id, product.amount - 1)
+  }
+
   return (
     <Container>
       <Products>
@@ -36,11 +44,11 @@ function Cart({ cart, removeProductFromCart }) {
               </td>
               <td>
                 <div>
-                  <button type="button">
+                  <button type="button" onClick={() => decrement(product)}>
                     <MdRemoveCircleOutline size={20} />
                   </button>
                   <input type="number" readOnly value={product.amount} />
-                  <button type="button">
+                  <button type="button" onClick={() => increment(product)}>
                     <MdAddCircleOutline size={20} />
                   </button>
                 </div>
@@ -77,7 +85,8 @@ const mapStateToProps = state => ({
 
 Cart.propTypes = {
   cart: PropTypes.func,
-  removeProductFromCart: PropTypes.func
+  removeProductFromCart: PropTypes.func,
+  updateAmountProductFromCart: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
