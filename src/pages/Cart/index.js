@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Container, Products, Total } from './styles'
 
-function Cart({ cart }) {
+function Cart({ cart, dispatch }) {
   return (
     <Container>
       <Products>
@@ -47,7 +47,12 @@ function Cart({ cart }) {
                 <strong>R$ 428,00</strong>
               </td>
               <td>
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() =>
+                    dispatch({ type: 'REMOVE_FROM_CART', id: product.id })
+                  }
+                >
                   <MdDelete size={20} />
                 </button>
               </td>
@@ -71,7 +76,8 @@ const mapStateToProps = state => ({
 })
 
 Cart.propTypes = {
-  cart: PropTypes.func
+  cart: PropTypes.func,
+  dispatch: PropTypes.func
 }
 
 export default connect(mapStateToProps)(Cart)
