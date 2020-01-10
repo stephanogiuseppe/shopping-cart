@@ -2,6 +2,7 @@ import { call, select, put, all, takeLatest } from 'redux-saga/effects'
 import { toast } from 'react-toastify'
 
 import api from './../../../services/api'
+import history from './../../../services/history'
 import { formatPriceToBRMask } from './../../../util/format'
 import {
   addProductToCartSuccess,
@@ -22,6 +23,7 @@ function* addToCart({ id }) {
 
   if (productExists) {
     yield put(updateAmountProductFromCartSuccess(id, ++productExists.amount))
+    history.push('/cart')
     return
   }
 
@@ -34,6 +36,7 @@ function* addToCart({ id }) {
   }
 
   yield put(addProductToCartSuccess(data))
+  history.push('/cart')
 }
 
 function* updateAmount({ id, amount }) {
