@@ -1,4 +1,5 @@
 import { call, select, put, all, takeLatest } from 'redux-saga/effects'
+import { toast } from 'react-toastify'
 
 import api from './../../../services/api'
 import { formatPriceToBRMask } from './../../../util/format'
@@ -6,6 +7,15 @@ import { addProductToCartSuccess, updateAmountProductFromCart } from './actions'
 
 function* addToCart({ id }) {
   const productExists = yield select(state => state.cart.find(p => p.id === id))
+
+  const stock = yield call(api.get, `/stock/${id}`)
+  const stockAmount = stock.data.amount
+  const currentAmount = productExists ? productExists.amount : 0
+
+  if (currentAmount + 1 > stockAmount) {
+    toast.error('Insufficient amount')
+    return
+  }
 
   if (productExists) {
     yield put(updateAmountProductFromCart(id, ++productExists.amount))
