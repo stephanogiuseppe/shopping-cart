@@ -1,6 +1,6 @@
 export default function cart(olderProducts = [], action) {
   switch (action.type) {
-    case 'ADD_PRODUCT_TO_CART': {
+    case 'ADD_PRODUCT_TO_CART_SUCCESS': {
       const productIndex = olderProducts.findIndex(
         item => item.id === action.product.id
       )

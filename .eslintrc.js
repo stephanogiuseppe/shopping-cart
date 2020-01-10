@@ -34,12 +34,13 @@ module.exports = {
       { extensions: ['.jsx', '.js'] }
     ],
     'import/prefer-default-export': 'off',
-    'semi': [2, "never"],
-    'space-before-function-paren': ["error", {
-      "anonymous": "never",
-      "named": "never",
-      "asyncArrow": "always"
+    'semi': [2, 'never'],
+    'space-before-function-paren': ['error', {
+      'anonymous': 'never',
+      'named': 'never',
+      'asyncArrow': 'always'
     }],
-    'no-console': ["error", { allow: ["tron"]}]
+    'no-console': ['error', { allow: ['tron']}],
+    'generator-star-spacing': ['error', { 'before': false, 'after': true }]
   }
 }
