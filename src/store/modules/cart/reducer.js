@@ -11,11 +11,7 @@ export default function cart(olderProducts = [], action) {
 
       return [...olderProducts]
     }
-    case 'UPDATE_AMOUNT_PRODUCT_FROM_CART': {
-      if (action.amount <= 0) {
-        return olderProducts
-      }
-
+    case 'UPDATE_AMOUNT_PRODUCT_FROM_CART_SUCCESS': {
       const productIndex = olderProducts.findIndex(
         item => item.id === action.id
       )

@@ -16,14 +16,14 @@ function Cart({
   cart,
   total,
   removeProductFromCart,
-  updateAmountProductFromCart
+  updateAmountProductFromCartRequest
 }) {
   function increment(product) {
-    updateAmountProductFromCart(product.id, product.amount + 1)
+    updateAmountProductFromCartRequest(product.id, product.amount + 1)
   }
 
   function decrement(product) {
-    updateAmountProductFromCart(product.id, product.amount - 1)
+    updateAmountProductFromCartRequest(product.id, product.amount - 1)
   }
 
   return (
@@ -101,7 +101,7 @@ const mapStateToProps = state => ({
 Cart.propTypes = {
   cart: PropTypes.func,
   removeProductFromCart: PropTypes.func,
-  updateAmountProductFromCart: PropTypes.func,
+  updateAmountProductFromCartRequest: PropTypes.func,
   total: PropTypes.number
 }
 

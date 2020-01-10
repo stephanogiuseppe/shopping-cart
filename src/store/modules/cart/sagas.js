@@ -3,7 +3,10 @@ import { toast } from 'react-toastify'
 
 import api from './../../../services/api'
 import { formatPriceToBRMask } from './../../../util/format'
-import { addProductToCartSuccess, updateAmountProductFromCart } from './actions'
+import {
+  addProductToCartSuccess,
+  updateAmountProductFromCartSuccess
+} from './actions'
 
 function* addToCart({ id }) {
   const productExists = yield select(state => state.cart.find(p => p.id === id))
@@ -18,7 +21,7 @@ function* addToCart({ id }) {
   }
 
   if (productExists) {
-    yield put(updateAmountProductFromCart(id, ++productExists.amount))
+    yield put(updateAmountProductFromCartSuccess(id, ++productExists.amount))
     return
   }
 
@@ -33,4 +36,23 @@ function* addToCart({ id }) {
   yield put(addProductToCartSuccess(data))
 }
 
-export default all([takeLatest('ADD_PRODUCT_TO_CART_REQUEST', addToCart)])
+function* updateAmount({ id, amount }) {
+  if (amount <= 0) {
+    return
+  }
+
+  const stock = yield call(api.get, `/stock/${id}`)
+  const stockAmount = stock.data.amount
+
+  if (amount > stockAmount) {
+    toast.error('Insufficient amount')
+    return
+  }
+
+  yield put(updateAmountProductFromCartSuccess(id, amount))
+}
+
+export default all([
+  takeLatest('ADD_PRODUCT_TO_CART_REQUEST', addToCart),
+  takeLatest('UPDATE_AMOUNT_PRODUCT_FROM_CART_REQUEST', updateAmount)
+])
