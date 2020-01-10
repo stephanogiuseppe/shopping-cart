@@ -8,19 +8,19 @@ function* addToCart({ id }) {
   const productExists = yield select(state => state.cart.find(p => p.id === id))
 
   if (productExists) {
-    const amount = ++productExists.amount
-    yield put(updateAmountProductFromCart(id, amount))
-  } else {
-    const response = yield call(api.get, `/products/${id}`)
-
-    const data = {
-      ...response.data,
-      amount: 1,
-      priceFormatted: formatPriceToBRMask(response.data.price)
-    }
-
-    yield put(addProductToCartSuccess(data))
+    yield put(updateAmountProductFromCart(id, ++productExists.amount))
+    return
   }
+
+  const response = yield call(api.get, `/products/${id}`)
+
+  const data = {
+    ...response.data,
+    amount: 1,
+    priceFormatted: formatPriceToBRMask(response.data.price)
+  }
+
+  yield put(addProductToCartSuccess(data))
 }
 
 export default all([takeLatest('ADD_PRODUCT_TO_CART_REQUEST', addToCart)])
