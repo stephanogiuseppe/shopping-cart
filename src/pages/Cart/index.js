@@ -10,8 +10,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Container, Products, Total } from './styles'
 import * as CartActions from './../../store/modules/cart/actions'
+import { formatPriceToBRMask } from './../../util/format'
 
-function Cart({ cart, removeProductFromCart, updateAmountProductFromCart }) {
+function Cart({
+  cart,
+  total,
+  removeProductFromCart,
+  updateAmountProductFromCart
+}) {
   function increment(product) {
     updateAmountProductFromCart(product.id, product.amount + 1)
   }
@@ -54,7 +60,7 @@ function Cart({ cart, removeProductFromCart, updateAmountProductFromCart }) {
                 </div>
               </td>
               <td>
-                <strong>R$ 428,00</strong>
+                <strong>{product.subtotal}</strong>
               </td>
               <td>
                 <button
@@ -72,7 +78,7 @@ function Cart({ cart, removeProductFromCart, updateAmountProductFromCart }) {
         <button type="button">Finish</button>
         <Total>
           <span>Total</span>
-          <strong>R$ 428,00</strong>
+          <strong>{total}</strong>
         </Total>
       </footer>
     </Container>
@@ -80,13 +86,23 @@ function Cart({ cart, removeProductFromCart, updateAmountProductFromCart }) {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart
+  cart: state.cart.map(product => ({
+    ...product,
+    subtotal: formatPriceToBRMask(product.price * product.amount)
+  })),
+  total: formatPriceToBRMask(
+    state.cart.reduce(
+      (total, product) => total + product.price * product.amount,
+      0
+    )
+  )
 })
 
 Cart.propTypes = {
   cart: PropTypes.func,
   removeProductFromCart: PropTypes.func,
-  updateAmountProductFromCart: PropTypes.func
+  updateAmountProductFromCart: PropTypes.func,
+  total: PropTypes.number
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
