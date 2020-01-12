@@ -23,7 +23,8 @@ module.exports = {
   },
   plugins: [
     'react',
-    'prettier'
+    'prettier',
+    'react-hooks'
   ],
   rules: {
     'prettier/prettier': 'error',
@@ -41,6 +42,8 @@ module.exports = {
       'asyncArrow': 'always'
     }],
     'no-console': ['error', { allow: ['tron']}],
-    'generator-star-spacing': ['error', { 'before': false, 'after': true }]
+    'generator-star-spacing': ['error', { 'before': false, 'after': true }],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
   }
 }
